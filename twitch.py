@@ -56,11 +56,11 @@ while sel:
         cb = Tk()
         cb.withdraw()
         OURL = cb.clipboard_get()
-        SURL = OURL.rsplit('/', 1)
-        try:
+        if "twitch.tv/" in OURL:
+            SURL = OURL.rsplit('/', 1)
             URL = "http://www.twitch.tv/" + SURL[1]
             livestreamer()
-        except:
+        else:
             print ("Invalid clipboard contents.")
         break
     elif sel.lower() == "q":
