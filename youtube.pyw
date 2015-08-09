@@ -28,5 +28,5 @@ def youtube_url_validation(url):
 if youtube_url_validation(url):
     mpv()
 else:
-    print "Not a valid youtube url."
+    print ("Not a valid youtube url.")
     exit()
