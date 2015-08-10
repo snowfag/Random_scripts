@@ -7,7 +7,7 @@ except:
     from Tkinter import Tk
 
 def livestreamer():
-    subprocess.Popen(['C:\Program Files (x86)\Livestreamer\livestreamer.exe', URL, "best"])
+    subprocess.Popen([r'C:\Program Files (x86)\Livestreamer\livestreamer.exe', URL, "best"])
 
 sel = True
 while sel:
