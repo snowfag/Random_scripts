@@ -6,13 +6,15 @@ except:
     from Tkinter import Tk
 
 creds = ['username', 'password']
+mpv = r'C:\Users\Yuki\mpv\mpv.exe'
+volume = '80'
 url = Tk().clipboard_get()
 
-def mpv():
-    subprocess.Popen(['C:\Users\Yuki\mpv\mpv.exe', "-volume=100", youtube_url_validation(url)])
+def mpv_youtube():
+    subprocess.Popen([mpv, '-volume=%s' % (volume), youtube_url_validation(url)])
 
 def mpv_vessel():
-    subprocess.Popen(['C:\Users\Yuki\mpv\mpv.exe', "-volume=100", '--ytdl-raw-options=username=%s,password=%s' % (creds[0],creds[1]), vessel_url_validation(url)])
+    subprocess.Popen([mpv, '-volume=%s' % (volume), '--ytdl-raw-options=username=%s,password=%s' % (creds[0],creds[1]), vessel_url_validation(url)])
 
 def vessel_url_validation(url):
     vessel_regex = ( r'(https?://)?(www\.)?vessel\.com/videos/([^&=%\?]{9})' )
@@ -29,9 +31,9 @@ def youtube_url_validation(url):
     return youtube_regex_match
 
 if youtube_url_validation(url):
-    mpv()
+    mpv_youtube()
 elif vessel_url_validation(url):
     mpv_vessel()
 else:
-    print ("Not a valid url.")
+    print ('Not a valid url.')
     exit()
