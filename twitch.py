@@ -53,9 +53,7 @@ while sel:
         livestreamer()
         break
     elif sel == "0":
-        cb = Tk()
-        cb.withdraw()
-        OURL = cb.clipboard_get()
+        OURL = Tk().clipboard_get()
         if "twitch.tv/" in OURL:
             SURL = OURL.rsplit('/', 1)
             URL = "http://www.twitch.tv/" + SURL[1]

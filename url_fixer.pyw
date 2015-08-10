@@ -3,7 +3,6 @@ try:
 except:
     from Tkinter import Tk
 t = Tk()
-t.withdraw()
 url = t.clipboard_get()
 def cba():
     t.clipboard_clear()
