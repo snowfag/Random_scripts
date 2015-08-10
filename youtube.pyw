@@ -6,15 +6,19 @@ except:
     from Tkinter import Tk
 
 creds = ['username', 'password']
-mpv = r'C:\Users\Yuki\mpv\mpv.exe'
+mpvfolder = r'C:\Users\Yuki\mpv'
 volume = '80'
 url = Tk().clipboard_get()
 
 def mpv_youtube():
-    subprocess.Popen([mpv, '-volume=%s' % (volume), youtube_url_validation(url)])
+    title = subprocess.Popen([r'%s\youtube-dl.exe' % (mpvfolder), '--get-title', youtube_url_validation(url)], stdout=subprocess.PIPE, creationflags=0x08000000).stdout.read()
+    mpv_title = r'--title=mpv - %s @ YouTube' % (title)
+    subprocess.Popen([r'%s\mpv.exe' % (mpvfolder), '-volume=%s' % (volume), mpv_title, youtube_url_validation(url)])
 
 def mpv_vessel():
-    subprocess.Popen([mpv, '-volume=%s' % (volume), '--ytdl-raw-options=username=%s,password=%s' % (creds[0],creds[1]), vessel_url_validation(url)])
+    title = subprocess.Popen([r'%s\youtube-dl.exe' % (mpvfolder), '--get-title', '--username=%s' % (creds[0]), '--password=%s' % (creds[1]), vessel_url_validation(url)], stdout=subprocess.PIPE, creationflags=0x08000000).stdout.read()
+    mpv_title = r'--title=mpv - %s @ Vessel' % (title)
+    subprocess.Popen([r'%s\mpv.exe' % (mpvfolder), '-volume=%s' % (volume), mpv_title, '--ytdl-raw-options=username=%s,password=%s' % (creds[0],creds[1]), vessel_url_validation(url)])
 
 def vessel_url_validation(url):
     vessel_regex = ( r'(https?://)?(www\.)?vessel\.com/videos/([^&=%\?]{9})' )
